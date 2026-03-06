@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo css</title>
+    <style>
+
+        .barraBotones{
+            
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .caja{
+            
+            flex: 1;
+        }
+
+        .derecha{
+            text-align: right;
+        }
+
+        button{
+            /*custom cursor*/
+            cursor: url('img/escudop.png'), auto;
+
+        }
+
+        body{
+        }
+
+        /*hide in mobile*/
+        @media (max-width: 800px) {
+            .noEnCelular{
+                display: none;
+            }
+        }
+
+        .oculto{
+            display: none;
+        }
+
+        /*show only in desktop*/
+        @media (min-width: 801px) {
+            .soloEnDesktop{
+                display: block;
+            }
+        }
+
+        @media print {
+            .noPrint{
+                display: none;
+            }
+
+            .soloEnDesktop{
+                display: block;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="barraBotones">
+        <div class="caja"><button>Boton 1</button></div>
+        <div class="caja noPrint"><button>Boton 2</button></div>
+        <div class="caja"><button>Boton 3</button></div>
+        <div class="caja noEnCelular"><button>Boton Especial  4</button></div>
+        <div class="caja">
+            <input type="button" value="Imprimir" onclick="window.print()">
+        </div>
+    </div>
+
+
+
+    <div class="barraBotones oculto soloEnDesktop">
+        <div class="caja"><button>Anterior</button></div>
+        <div class="caja derecha"><button>Siguiente</button></div>
+
+    </div>
+
+  </body>
+
+  <script>
+    let botones = document.getElementsByTagName("button");
+
+    for(let x =0 ; x < botones.length; x++){
+        botones[x].addEventListener("click", function(){
+            //alert("Has hecho click en el boton " + botones[x].textContent);
+
+            //cambiar la posicion del boton aletoriamente
+            let randomX = Math.floor(Math.random() * window.innerWidth);
+            let randomY = Math.floor(Math.random() * window.innerHeight);
+
+            botones[x].style.position = "absolute";
+            botones[x].style.left = randomX + "px";
+            botones[x].style.top = randomY + "px";
+
+            botones[x].style.transition = "all 0.5s";
+            
+
+        });
+    }
+
+
+  </script>
+
+</html>
