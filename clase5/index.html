@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Sumadora</title>
+</head>
+<body>
+    <div>
+		<label>
+			Numero 1:
+			<input type="number" id="txtN1"/>
+		</label>
+		
+		<label>
+			Numero 2:
+			<input type="number" id="txtN2"/>
+		</label>
+		
+		<button id="btnSumar" onclick="sumarNumeros();">Sumar</button>
+		<span id="spResultado">Resultado</span>
+		
+		<button onclick="agregarFoto();">Agregar Foto</button>
+	</div>
+	<script>
+	
+		function agregarFoto(){
+			foto = document.createElement('img');
+			foto.src = "https://i.ytimg.com/vi/RiQhPKw9gJw/maxresdefault.jpg";
+			document.body.appendChild(foto);
+		
+		}
+	
+		function sumarNumeros(){
+			console.log("vamos a sumar los numeros");
+			
+			console.log("vamos a tomar el primer valor");
+			let num1 = document.getElementById('txtN1').value;
+			console.log("valor tomado es ", num1);
+			
+			let num2 = document.getElementById('txtN2').value;
+			
+			let suma = parseInt(num1) + parseInt(num2);
+			
+			
+			document.getElementById('btnSumar').style.background = "yellow";
+			
+			document.getElementById('spResultado').innerHTML = suma;
+		}
+	</script>
+</body>
+</html>

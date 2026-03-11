@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a mi pagina</title>
+    <style>
+        #iframeNav{
+            width: 100%;
+            height: 600px;
+        }
+
+        #divMenu{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #divMenu a{
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+        }
+
+        #divMenu a:hover{
+            color: red;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        #imgRadio{
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        /*animacion para el radio sonando, girar infinito*/
+        @keyframes girar{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+
+        /*efecto de fondo fuego para el imgRadio*/
+        .imgActiva{
+            box-shadow: 0 0 20px 5px red;
+            border-radius: 30px;;
+        }
+
+        #inputVolumen{
+            width: 300px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="divMenu">
+        <a href="pagina1.html" target="iframeNav">Enlace 1</a>
+        <a href="pagina2.html" target="iframeNav">Enlace 2</a>
+        <a href="pagina3.html" target="iframeNav">Enlace 3</a>
+
+    </div>
+    <div id="divMain">
+        <iframe name="iframeNav" id="iframeNav" src="pagina1.html" frameborder="0" ></iframe>
+    </div>
+    <div id="divRadio">
+        <label> 
+            <input onclick="reproducirAudio(this);" type="checkbox" id="chkRadio" style="display:none"/>
+            <img  id="imgRadio" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu_Y8Ed4uV02gPbZuRhjAfPuVQhYW3gMx2lg&s"/>
+        </label>
+
+        Volumen: <input 
+        id="inputVolumen"
+        type="range" value="100" onchange="cambiarVolumen(this.value)"/>
+        <!-- sonidos/goku.mp3 only play -->
+        <audio id="audioGoku" >
+            <source src="sonidos/dbz2.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+    <script>
+        function reproducirAudio(chkx){
+            let audioGoku = document.getElementById("audioGoku");
+            let imgRadio = document.getElementById("imgRadio");
+            let navegax = document.getElementById("iframeNav");
+
+            if(chkx.checked){
+                audioGoku.play();
+                imgRadio.style.animation = "girar 3s linear infinite";
+                imgRadio.classList.add("imgActiva");
+                navegax.classList.add("imgActiva");
+            }else{
+                audioGoku.pause();
+                audioGoku.currentTime = 0;
+                imgRadio.style.animation = "none";
+                imgRadio.classList.remove("imgActiva");
+                navegax.classList.remove("imgActiva");
+            }
+        }
+
+        function cambiarVolumen(nvolumen){
+            let audioGoku = document.getElementById("audioGoku");
+            let volumen = parseInt(nvolumen);
+            if(volumen < 0){
+                volumen = 0;
+            }else if(volumen > 100){
+                volumen = 100;
+            }
+            audioGoku.volume = volumen / 100;
+        }
+    </script>
+    
+</body>
+</html>
